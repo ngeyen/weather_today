@@ -21,4 +21,8 @@
     <string name="title_activity_news_feeds">News Feeds</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="wind_image_illustration">wind image illustration</string>
+    <string name="sunset_image_illustration">Sunset image illustration</string>
+    <string name="pressure_illustration">pressure illustration</string>
+    <string name="error_text">Something went wrong</string>
 </resources>
