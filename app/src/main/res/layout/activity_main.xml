@@ -14,21 +14,29 @@
         android:layout_height="match_parent"
         android:visibility="visible">
 
-        <LinearLayout android:id="@+id/addressContainer"
+        <LinearLayout
+            android:id="@+id/addressContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
-            <TextView android:id="@+id/address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:text="Kigali, Rw"/>
-            <TextView android:id="@+id/updated_at"
+                android:text="Kigali, Rw"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/updated_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="20 April 2012, 20:08 PM"/>
+                android:text="20 April 2020, 20:08 PM"
+                android:textSize="14sp" />
         </LinearLayout>
 
 

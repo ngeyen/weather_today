@@ -22,7 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 
-class WeatherTask extends AsyncTask<String, Void, String> {
+class WeatherTask extends AsyncTask<String, Void, String>
+{
     String updatedAtText, temp, tempMin, tempMax, pressure, humidity, windSpeed, weatherDescription, address;
     Long sunrise, sunset, updatedAt;
     boolean loader, errorText;
