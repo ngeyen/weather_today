@@ -9,4 +9,5 @@ for users in Kigali-Rwanda I hope to include other cities in the near future. in
 - maximum temperature
 - Atmospheric Pressure
 - Humidity
-other features are on the way :)
+
+Other features are on the way :)
