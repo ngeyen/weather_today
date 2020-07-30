@@ -8,5 +8,6 @@
     <color name="colorPrimaryDarkCustom">#122259</color>
     <color name="colorAccentCustom">#D81B60</color>
     <color name="colorFont1">#FFFFFF</color>
+    <color name="colorFont2">#FFFFFF</color>
 
 </resources>

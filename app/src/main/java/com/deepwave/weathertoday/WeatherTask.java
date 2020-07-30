@@ -16,18 +16,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 
 class WeatherTask extends AsyncTask<String, Void, String> {
-
-
     String updatedAtText, temp, tempMin, tempMax, pressure, humidity, windSpeed, weatherDescription, address;
     Long sunrise, sunset, updatedAt;
     boolean loader, errorText;
-
+    String CITY = "Kigali, RW";
+    String API = "5068173e2b315f66fd6a0944ae995dd1";
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -38,49 +38,41 @@ class WeatherTask extends AsyncTask<String, Void, String> {
     }
     protected String doInBackground(String... params) {
 
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
+        String str="https://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&units=metric&appid=" + API;
+        URLConnection urlConn = null;
+        BufferedReader bufferedReader = null;
+        try
+        {
+            URL url = new URL(str);
+            urlConn = url.openConnection();
+            bufferedReader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
 
-        try {
-            URL url = new URL(params[0]);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.connect();
-
-            InputStream stream = connection.getInputStream();
-
-            reader = new BufferedReader(new InputStreamReader(stream));
-
-            StringBuilder buffer = new StringBuilder();
+            StringBuffer stringBuffer = new StringBuffer();
             String line;
-
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line).append("\n");
-                Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
+            while ((line = bufferedReader.readLine()) != null)
+            {
+                stringBuffer.append(line);
             }
 
-            return buffer.toString();
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-            try {
-                if (reader != null) {
-                    reader.close();
+            return stringBuffer.toString();
+        }
+        catch(Exception ex)
+        {
+            Log.e("App", "yourDataTask", ex);
+            return null;
+        }
+        finally
+        {
+            if(bufferedReader != null)
+            {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
-        return null;
     }
-
 
     @Override
     protected void onPostExecute(String result) {
@@ -104,11 +96,10 @@ class WeatherTask extends AsyncTask<String, Void, String> {
             sunrise = sys.getLong("sunrise");
             sunset = sys.getLong("sunset");
             windSpeed = wind.getString("speed");
+
             weatherDescription = weather.getString("description");
 
-            address = jsonObj.getString("name") + ", " + sys.getString("country");
-
-
+            address = sys.getString("name") + ", " + sys.getString("country");
 
 
         } catch (JSONException e) {

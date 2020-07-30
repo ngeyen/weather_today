@@ -17,8 +17,6 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    String CITY = "Kigali, RW";
-    String API = "5068173e2b315f66fd6a0944ae995dd1";
 
     TextView addressTxt, updated_atTxt, statusTxt, tempTxt, temp_minTxt, temp_maxTxt, sunriseTxt,
             sunsetTxt, windTxt, pressureTxt, humidityTxt;
@@ -26,10 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
     WeatherTask weatherTask = new WeatherTask();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new WeatherTask().execute();
 
         addressTxt = findViewById(R.id.address);
         updated_atTxt = findViewById(R.id.updated_at);
@@ -51,10 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(openFeeds);
             }
         });
-        new WeatherTask().execute("https://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&units=metric&appid=" + API);
 
 
-
+        try{
         /* Populating extracted data into our views */
         addressTxt.setText(weatherTask.address);
         updated_atTxt.setText(weatherTask.updatedAtText);
@@ -76,7 +76,10 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.loader).setVisibility(View.GONE);
             findViewById(R.id.errorText).setVisibility(View.VISIBLE);
         }
-
-
+        }
+        catch (NullPointerException e){
+            statusTxt.setText("N/A");
+        }
     }
+
 }
