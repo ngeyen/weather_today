@@ -14,6 +14,7 @@ Other features are on the way :)
 Here's our logo (hover to see the title text):
 
 Screenshot: 
+
 ![alt text](https://github.com/ngeyen/weather_today/blob/master/Weather%20Today.jpg)
 
 
